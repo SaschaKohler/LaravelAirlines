@@ -20,6 +20,10 @@
 - den seeder mit den daten aus der api befüllt
 - cave -> sehr inkonsistenter Datensatz daher im seeder nur daten gelesen die mindestens 8 Datenpunkte aufweisen
 - api im seeder requested (guzzle http). id autoincrement da datensätze teilweise ohne id 
+###started with REST API
+- GET /api/airlines soll alle Airlines ausgeben    -> implementiert
+- GET /api/airlines/:id soll die Airline mit der :id ausgeben  ->implementiert 
+  
 
 
 
@@ -28,9 +32,8 @@
    In der Rest API wollen wir Airlines anzeigen, eintragen und updaten
 
 - POST /api/airline sollte eine neue Airline erstellen
-- GET /api/airlines soll alle Airlines ausgeben
-- GET /api/airlines/:id soll die Airline mit der :id ausgeben
 - PUT /api/airlines/:id soll den Namen der Airline mit der :id updaten
+
 
 4. Pagination
    In einem anderen Endpunkt der API können wir uns Passagiere zu den Airlines holen, diese sind jedoch paginated.
@@ -40,3 +43,8 @@ Endpunkt: https://api.instantwebtools.net/v1/passenger?page=0&size=10
 Docs: https://www.instantwebtools.net/fake-rest-api#read-passenger-paginated
 
 GET /api/passengers/:airline_id?page=1
+
+#TO DO'S / Refactoring
+
+- Datentypen in Datenbank müssen angepasst werden.
+- Model muss konsitent implementiert werden bzw. dahingehend überabeitet werden

@@ -7,22 +7,23 @@
 
 #Laravel Setup
 1.   Laravel 8.x in einem Docker-Environment aufsetzen, Laravel Sail ist ausreichend - kann aber auch gerne ein eigenes Setup sein.
-###habe mich für laravel-sail entschieden / docker images entsprechend local installiert
+- habe mich für laravel-sail entschieden / docker images entsprechend local installiert
 
 
 2. Eloquent Model
    Aus dieser Rest-Api wollen wir Airlines in unsere Datenbank speichern: https://api.instantwebtools.net/v1/airlines
    Bitte dafür ein passendes Model+Migration erstellen und per Seeder die Daten in die DB importieren.
 
-###Migration für airline_table erstellt -> mysql liegt im DockerImage als datenbank
-###default migration behalten und ebenfalls in daten bank angelegt erstellt
-###den seeder mit den daten aus der api befüllt
-###cave -> sehr inkonsistenter Datensatz daher im seeder nur daten gelesen die mindestens 8 Datenpunkte aufweisen
-###api im seeder requested (guzzle http). id autoincrement da datensätze teilweise ohne id 
+### Already Done 
+- Migration für airline_table erstellt -> mysql liegt im DockerImage als datenbank
+- default migration behalten und ebenfalls in daten bank angelegt erstellt
+- den seeder mit den daten aus der api befüllt
+- cave -> sehr inkonsistenter Datensatz daher im seeder nur daten gelesen die mindestens 8 Datenpunkte aufweisen
+- api im seeder requested (guzzle http). id autoincrement da datensätze teilweise ohne id 
 
 
 
-# STILL TO DO
+#STILL TO DO
 3. Rest API
    In der Rest API wollen wir Airlines anzeigen, eintragen und updaten
 

@@ -33,7 +33,5 @@ class AirlineTableSeeder extends Seeder
 
         }
 
-
-        //
     }
 }

@@ -20,20 +20,17 @@
 - den seeder mit den daten aus der api befüllt
 - cave -> sehr inkonsistenter Datensatz daher im seeder nur daten gelesen die mindestens 8 Datenpunkte aufweisen
 - api im seeder requested (guzzle http). id autoincrement da datensätze teilweise ohne id 
-### started with REST API
-- GET /api/airlines soll alle Airlines ausgeben    -> implementiert
-- GET /api/airlines/:id soll die Airline mit der :id ausgeben  ->implementiert 
-  
 
-
-
-# STILL TO DO
 3. Rest API
    In der Rest API wollen wir Airlines anzeigen, eintragen und updaten
 
-- POST /api/airline sollte eine neue Airline erstellen
-- PUT /api/airlines/:id soll den Namen der Airline mit der :id updaten
+- GET /api/airlines soll alle Airlines ausgeben    -> implementiert
+- GET /api/airlines/:id soll die Airline mit der :id ausgeben  ->implementiert 
+- POST /api/airline sollte eine neue Airline erstellen.  -> implementiert
+- PUT /api/airlines/:id soll den Namen der Airline mit der :id updaten. -> implementiert
+  
 
+# STILL TO DO
 
 4. Pagination
    In einem anderen Endpunkt der API können wir uns Passagiere zu den Airlines holen, diese sind jedoch paginated.
@@ -48,3 +45,4 @@ GET /api/passengers/:airline_id?page=1
 
 - Datentypen in Datenbank müssen angepasst werden.
 - Model muss konsistent implementiert werden bzw. dahingehend überabeitet werden
+- Validation of POST request -> schmeisst jetzt sql error -> bad ! bin drann 

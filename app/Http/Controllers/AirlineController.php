@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Airline;
 use Illuminate\Http\Request;
+use Validator;
 
 class AirlineController extends Controller
 {
@@ -35,18 +36,40 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        $airline = new Airline();
-        $airline->name = $request->input('name');
-        $airline->country = $request->input('country');
-        $airline->logo = $request->input('logo');
-        $airline->slogan = $request->input('slogan');
-        $airline->headquarters = $request->input('headquarters');
-        $airline->website = $request->input('website');
-        $airline->established = $request->input('established');
 
-        $airline->save();
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'country' => 'required',
+            'logo' => 'required',
+            'slogan' => 'required',
+            'headquarters' => 'required',
+            'website' => 'required',
+            'established' => 'required',
+        ]);
 
-        return $airline;
+        if ($validator->fails()) {
+            $messages = $validator->errors();
+            foreach($messages->all() as $message){
+                return $message;
+            }
+
+        } else {
+            $airline = new Airline();
+            $airline->name = $request->input('name');
+            $airline->country = $request->input('country');
+            $airline->logo = $request->input('logo');
+            $airline->slogan = $request->input('slogan');
+            $airline->headquarters = $request->input('headquarters');
+            $airline->website = $request->input('website');
+            $airline->established = $request->input('established');
+
+            $airline->save();
+
+            return $airline;
+
+        }
+
+
     }
 
     /**
@@ -68,7 +91,7 @@ class AirlineController extends Controller
      */
     public function edit($id)
     {
-         dd('Not implemented in classic api');
+        dd('Not implemented in classic api');
     }
 
     /**

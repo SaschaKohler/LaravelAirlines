@@ -1,11 +1,11 @@
 
-#Laravel 
-###getting used to it
+# Laravel 
+### getting used to it
 
 
-#Tasks
+# Tasks
 
-#Laravel Setup
+# Laravel Setup
 1.   Laravel 8.x in einem Docker-Environment aufsetzen, Laravel Sail ist ausreichend - kann aber auch gerne ein eigenes Setup sein.
 - habe mich für laravel-sail entschieden / docker images entsprechend local installiert
 
@@ -20,14 +20,14 @@
 - den seeder mit den daten aus der api befüllt
 - cave -> sehr inkonsistenter Datensatz daher im seeder nur daten gelesen die mindestens 8 Datenpunkte aufweisen
 - api im seeder requested (guzzle http). id autoincrement da datensätze teilweise ohne id 
-###started with REST API
+### started with REST API
 - GET /api/airlines soll alle Airlines ausgeben    -> implementiert
 - GET /api/airlines/:id soll die Airline mit der :id ausgeben  ->implementiert 
   
 
 
 
-#STILL TO DO
+# STILL TO DO
 3. Rest API
    In der Rest API wollen wir Airlines anzeigen, eintragen und updaten
 
@@ -44,7 +44,7 @@ Docs: https://www.instantwebtools.net/fake-rest-api#read-passenger-paginated
 
 GET /api/passengers/:airline_id?page=1
 
-#TO DO'S / Refactoring
+# TO DO'S / Refactoring / Anspruch an mich selbst
 
 - Datentypen in Datenbank müssen angepasst werden.
-- Model muss konsitent implementiert werden bzw. dahingehend überabeitet werden
+- Model muss konsistent implementiert werden bzw. dahingehend überabeitet werden

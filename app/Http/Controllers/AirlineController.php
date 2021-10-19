@@ -7,35 +7,92 @@ use Illuminate\Http\Request;
 
 class AirlineController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        return Airline::all();
+        return Airline::all()->toJson(JSON_PRETTY_PRINT);
     }
 
-    public function show($id)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return Airline::find($id);
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        return Airline::create($request->all());
-    }
+        $airline = new Airline();
+        $airline->name = $request->input('name');
+        $airline->country = $request->input('country');
+        $airline->logo = $request->input('logo');
+        $airline->slogan = $request->input('slogan');
+        $airline->headquarters = $request->input('headquarters');
+        $airline->website = $request->input('website');
+        $airline->established = $request->input('established');
 
-    public function update(Request $request, $id)
-    {
-        $airline = Airline::find($id);
-        $airline->update($request->all());
+        $airline->save();
 
         return $airline;
     }
 
-    public function delete(Request $request, $id)
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $airline = Airline::findOrFail($id);
-        $airline->delete();
-
-        return 204;
+        return Airline::findOrFail($id);
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+         dd('Not implemented in classic api');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $airline = Airline::find($id);
+        $airline->update($request->all());
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $airline = Airline::find($id);
+        $airline->delete();
+    }
 }

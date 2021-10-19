@@ -11,6 +11,7 @@ class Airline extends Model
 
     protected $table = 'airline_table';
 
+    public $timestamps=true;
 
     protected $fillable = [
         'name',
@@ -21,5 +22,12 @@ class Airline extends Model
         'website',
         'established',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:00',
+        'updated_at' => 'datetime:Y-m-d H:00',
+    ];
+
+
 
 }

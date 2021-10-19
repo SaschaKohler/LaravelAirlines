@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Airline;
+use App\Http\Controllers\AirlineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +15,11 @@ use App\Models\Airline;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-/*
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-*/
-Route::get('/airlines', function() {
-    return Airline::all();
 
-});
 
-Route::get('/airlines/{id}', function($id) {
-    return Airline::find($id);
-});
+Route::resource('airlines',AirlineController::class);
+

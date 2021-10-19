@@ -13,8 +13,9 @@ use App\Models\Airline;
 |
 */
 
-Route::get('/', function () {
-    foreach(Airline::all() as $airline) {
-        echo $airline->name;
-    }
+Route::get('/token', function (Request $request) {
+  return  $request->session()->token();
+
+
+
 });

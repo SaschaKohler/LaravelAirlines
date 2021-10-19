@@ -49,9 +49,7 @@ class AirlineController extends Controller
 
         if ($validator->fails()) {
             $messages = $validator->errors();
-            foreach($messages->all() as $message){
-                return $message;
-            }
+            return json_encode($messages->all());
 
         } else {
             $airline = new Airline();
@@ -80,6 +78,7 @@ class AirlineController extends Controller
      */
     public function show($id)
     {
+        $airline = Airline::find($id);
         return Airline::findOrFail($id);
     }
 

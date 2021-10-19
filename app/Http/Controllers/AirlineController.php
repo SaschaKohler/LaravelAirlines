@@ -18,15 +18,6 @@ class AirlineController extends Controller
         return Airline::all()->toJson(JSON_PRETTY_PRINT);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -64,10 +55,7 @@ class AirlineController extends Controller
             $airline->save();
 
             return $airline;
-
         }
-
-
     }
 
     /**
@@ -104,6 +92,7 @@ class AirlineController extends Controller
     {
         $airline = Airline::find($id);
         $airline->update($request->all());
+        return $airline;
     }
 
     /**

@@ -69,16 +69,14 @@ class PassengerController extends Controller
 
         $fun = collect($passengers['data']);
 
-        $search = $fun->filter(function($key,$value){
-               // wishlist  iterieren until airline -> id  == $value
-        });
-
+        $search = $fun->where('airline')[0];
+   /*
         foreach($fun as $key => $value){
             foreach ($value  as $key_it => $value_it){
                     $filter[] = $value_it;
                 }
             }
-
+*/
        // return $filter;
     }
 

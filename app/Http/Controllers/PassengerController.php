@@ -13,45 +13,12 @@ class PassengerController extends Controller
      * repetetiv code outsourced
      */
 
-    protected function getAPIData($url){
+    protected function getAPIData($url)
+    {
         $httpClient = new \GuzzleHttp\Client();
         $request = $httpClient->get($url);
         $data = json_decode($request->getBody()->getContents(), true);
         return $data;
-    }
-
-    /*
-     * getPage returns paginated PassengerList
-     * 50 passenger per page
-     *
-     * if pageIndex >= totalPassengers / $perPage(50)  -> getPage returns empty array.
-     *  -> Error message seems unnecessary
-     */
-
-
-    public function getPage(Request $request)
-    {
-        $data =  $this->getAPIData("https://api.instantwebtools.net/v1/passenger"); // getting array with number totalPassengers
-        $passengers = $this->getAPIData("https://api.instantwebtools.net/v1/passenger?page=0&size="
-            . $data['totalPassengers']);  // getting the whole bunch of Passengers with airlines nested
-
-        if (!empty($request->input('page'))){  // checking for page request
-            $page = $request->input('page');   // if true set pageIndex
-        } else {
-            $page = 1;   // start at page 1
-        }
-
-        $collection = collect($passengers['data']);  // collection for later stats or ordering
-        $perPage = 50;    // amount of items per page is hard coded else we have to calculate ( perPage = totalPassengers / pageCount)
-
-        $paginate = new LengthAwarePaginator(         // Laravel Documentation "LengthAwarePaginator"
-            $collection->forPage($page, $perPage),
-            $collection->count(),
-            $perPage,
-            $page,
-        );
-
-        return $paginate->items();   // return items;
     }
 
     /*
@@ -60,24 +27,36 @@ class PassengerController extends Controller
      * $request for testing classic ?page=1  as $request->input();
      */
 
-    public function getPassengersPerAirline(Request $request, $airline_id){
+    public function getPassengersPerAirlinePaginated(Request $request, $airline_id)
+    {
 
-        $data =  $this->getAPIData("https://api.instantwebtools.net/v1/passenger"); // getting array with number totalPassengers
-        $passengers = $this->getAPIData("https://api.instantwebtools.net/v1/passenger?page=0&size=10");
-            //. $data['totalPassengers']);  // getting the whole bunch of Passengers with airlines nested
+        $data = $this->getAPIData("https://api.instantwebtools.net/v1/passenger"); // getting array with number totalPassengers
+        $passengers = $this->getAPIData("https://api.instantwebtools.net/v1/passenger?page=0&size="
+            . $data['totalPassengers']);  // getting the whole bunch of Passengers with airlines nested
 
+        $passengerCollection = collect($passengers['data']);    // for later filtering method
 
-        $fun = collect($passengers['data']);
+        $arrayFiltered = $passengerCollection->filter(function ($value) use ($airline_id) {
+            return $value['airline'][0]['id'] == $airline_id;
+        });
 
-        $search = $fun->where('airline')[0];
-   /*
-        foreach($fun as $key => $value){
-            foreach ($value  as $key_it => $value_it){
-                    $filter[] = $value_it;
-                }
-            }
-*/
-       // return $filter;
+        if (!empty($request->input('page'))) {  // checking for page request
+            $page = $request->input('page');   // if true set pageIndex - 1  array starts with 0 ;)
+        } else {
+            $page = 1;   // start at page 1
+        }
+
+        $perPage = 50;    // amount of items per page is hard coded else we have to calculate ( perPage = totalPassengers / pageCount)
+
+        $paginate = new LengthAwarePaginator(         // Laravel Documentation "LengthAwarePaginator"
+            $arrayFiltered->forPage($page, $perPage),
+            $arrayFiltered->count(),
+            $perPage,
+            $page,
+        );
+
+        return $paginate->items();   // return items;
+
     }
 
 

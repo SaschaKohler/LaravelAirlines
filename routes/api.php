@@ -16,13 +16,7 @@ use App\Http\Controllers\AirlineController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 
 Route::resource('airlines',AirlineController::class);
 
-Route::get('passengers',[ PassengerController::class, 'getPage' ]);
-
-Route::get('passengers/{airline_id}' , [PassengerController::class, 'getPassengersPerAirline']);
+Route::get('passengers/{airline_id}' , [PassengerController::class, 'getPassengersPerAirlinePaginated']);

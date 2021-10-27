@@ -15,7 +15,8 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        return Airline::all()->toJson(JSON_PRETTY_PRINT);
+        //return Airline::first()->toJson(JSON_PRETTY_PRINT);    //production only
+        return Airline::all()->take(10);   // for debugging purpose
     }
 
 
@@ -66,7 +67,7 @@ class AirlineController extends Controller
      */
     public function show($id)
     {
-        $airline = Airline::find($id);
+      //  $airline = Airline::find($id);
         return Airline::findOrFail($id);
     }
 

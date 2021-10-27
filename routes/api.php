@@ -16,7 +16,11 @@ use App\Http\Controllers\AirlineController;
 |
 */
 
+// please -> php artisan route:list
 
 Route::resource('airlines',AirlineController::class);
+
+
+//  passengers/{airline_id}?page=:page_number  returns 50 passengers per page
 
 Route::get('passengers/{airline_id}' , [PassengerController::class, 'getPassengersPerAirlinePaginated']);

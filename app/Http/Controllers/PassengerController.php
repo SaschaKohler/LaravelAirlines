@@ -10,7 +10,7 @@ class PassengerController extends Controller
 {
 
     /*
-     * repetetiv code outsourced
+     * repeat code outsourced
      */
 
     protected function getAPIData($url)
@@ -30,9 +30,9 @@ class PassengerController extends Controller
     public function getPassengersPerAirlinePaginated(Request $request, $airline_id)
     {
 
-        $data = $this->getAPIData("https://api.instantwebtools.net/v1/passenger"); // getting array with number totalPassengers
-        $passengers = $this->getAPIData("https://api.instantwebtools.net/v1/passenger?page=0&size="
-            . $data['totalPassengers']);  // getting the whole bunch of Passengers with airlines nested
+        //$data = $this->getAPIData("https://api.instantwebtools.net/v1/passenger"); // getting array with number totalPassengers
+        $passengers = $this->getAPIData("https://api.instantwebtools.net/v1/passenger?page=0&size=50");
+         //   . $data['totalPassengers']);  // getting the whole bunch of Passengers with airlines nested
 
         $passengerCollection = collect($passengers['data']);    // for later filtering method
 

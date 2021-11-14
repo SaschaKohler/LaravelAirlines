@@ -11,23 +11,32 @@ class Airline extends Model
 
     protected $table = 'airline_table';
 
-    public $timestamps=true;
+    protected $guarded = ['id'];
 
-    protected $fillable = [
-        'name',
-        'country',
-        'logo',
-        'slogan',
-        'headquarters',
-        'website',
-        'established',
-    ];
-
-    protected $casts = [
-        'created_at' => 'datetime:Y-m-d H:00',
-        'updated_at' => 'datetime:Y-m-d H:00',
-    ];
+//    protected $fillable = [
+//        'name',
+//        'country',
+//        'logo',
+//        'slogan',
+//        'headquarters',
+//        'website',
+//        'established',
+//    ];
 
 
+
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, fn($query,$search) =>
+            $query
+            ->where('name','like','%' . $search . '%')
+
+        );
+    }
+
+    public function passenger() {
+        $this->hasMany(Passenger::class);
+    }
 
 }

@@ -15,9 +15,12 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        //return Airline::first()->toJson(JSON_PRETTY_PRINT);    //production only
-        return Airline::all()->take(10);   // for debugging purpose
+        return Airline::query()
+            ->filter(request(['search']))
+            ->paginate(request('per_page'));   // for debugging purpose
     }
+
+
 
 
     /**

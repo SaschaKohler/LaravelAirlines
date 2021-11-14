@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Airline;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,7 @@ class AirlineTableSeeder extends Seeder
 
         foreach($airlines as $airline) {
             if(count($airline)==8) {
-                DB::table('airline_table')->insert([
+                Airline::create(array(
                     'name' => $airline['name'],
                     'country' => $airline['country'],
                     'logo' => $airline['logo'],
@@ -28,7 +29,7 @@ class AirlineTableSeeder extends Seeder
                     'headquarters' => $airline['head_quaters'],
                     'website' => $airline['website'],
                     'established' => $airline['established']
-                ]);
+                ));
             }
 
         }

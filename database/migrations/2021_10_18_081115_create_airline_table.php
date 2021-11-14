@@ -23,8 +23,7 @@ class CreateAirlineTable extends Migration
             $table->text('headquarters');  // cave in api head_quaters !
             $table->text('website');
             $table->text('established');
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'))->useCurrentOnUpdate();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->useCurrent();
+            $table->timestamps();
 
         });
     }

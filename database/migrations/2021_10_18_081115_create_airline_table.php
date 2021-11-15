@@ -14,7 +14,7 @@ class CreateAirlineTable extends Migration
      */
     public function up()
     {
-        Schema::create('airline_table', function(Blueprint $table) {
+        Schema::create('airlines', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('country');

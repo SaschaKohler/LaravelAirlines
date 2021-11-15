@@ -9,8 +9,6 @@ class Airline extends Model
 {
     use HasFactory;
 
-    protected $table = 'airline_table';
-
     protected $guarded = ['id'];
 
 //    protected $fillable = [
@@ -25,7 +23,6 @@ class Airline extends Model
 
 
 
-
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, fn($query,$search) =>
@@ -35,8 +32,8 @@ class Airline extends Model
         );
     }
 
-    public function passenger() {
-        $this->hasMany(Passenger::class);
+    public function passengers() {
+       return  $this->hasMany(  Passenger::class);
     }
 
 }

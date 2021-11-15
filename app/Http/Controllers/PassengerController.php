@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Passenger;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class PassengerController extends Controller
 {
@@ -12,6 +14,15 @@ class PassengerController extends Controller
     /*
      * repeat code outsourced
      */
+
+    public function index()
+    {
+        $passenger = Passenger::select('name', DB::raw('count(*) as trips'))
+            ->filter(request(['airline_id','search']))
+            ->groupBy('name')->paginate(request('per_page'));
+        return $passenger;
+
+    }
 
     protected function getAPIData($url)
     {
@@ -32,7 +43,7 @@ class PassengerController extends Controller
 
         //$data = $this->getAPIData("https://api.instantwebtools.net/v1/passenger"); // getting array with number totalPassengers
         $passengers = $this->getAPIData("https://api.instantwebtools.net/v1/passenger?page=0&size=50");
-         //   . $data['totalPassengers']);  // getting the whole bunch of Passengers with airlines nested
+        //   . $data['totalPassengers']);  // getting the whole bunch of Passengers with airlines nested
 
         $passengerCollection = collect($passengers['data']);    // for later filtering method
 

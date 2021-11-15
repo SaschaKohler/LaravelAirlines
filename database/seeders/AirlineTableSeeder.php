@@ -15,16 +15,19 @@ class AirlineTableSeeder extends Seeder
      */
     public function run()
     {
+
+        Airline::truncate();
+
         $httpClient = new \GuzzleHttp\Client();
         $request = $httpClient->get("https://api.instantwebtools.net/v1/airlines");
-        $airlines = json_decode($request->getBody()->getContents(),true);
+        $airlines = json_decode($request->getBody(),true);
 
         foreach($airlines as $airline) {
             if(count($airline)==8) {
                 Airline::create(array(
                     'name' => $airline['name'],
                     'country' => $airline['country'],
-                    'logo' => $airline['logo'],
+                    'logo' => isset($airline['logo']) ? $airline['logo'] : 'https://via.placeholder.com/300',
                     'slogan' => $airline['slogan'],
                     'headquarters' => $airline['head_quaters'],
                     'website' => $airline['website'],

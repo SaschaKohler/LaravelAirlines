@@ -15,12 +15,14 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        return Airline::query()
+
+        $airlines = Airline::query()
             ->filter(request(['search']))
-            ->paginate(request('per_page'));   // for debugging purpose
+            ->paginate(request('per_page'));
+
+        return $airlines;
+
     }
-
-
 
 
     /**
@@ -70,7 +72,7 @@ class AirlineController extends Controller
      */
     public function show($id)
     {
-      //  $airline = Airline::find($id);
+        //  $airline = Airline::find($id);
         return Airline::findOrFail($id);
     }
 

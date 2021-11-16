@@ -37,7 +37,7 @@ class AirlineController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'country' => 'required',
-            'logo' => 'required',
+            'logo' => 'required|url',
             'slogan' => 'required',
             'headquarters' => 'required',
             'website' => 'required',

@@ -16,7 +16,6 @@ class AirlineTableSeeder extends Seeder
     public function run()
     {
 
-        Airline::truncate();
 
         $httpClient = new \GuzzleHttp\Client();
         $request = $httpClient->get("https://api.instantwebtools.net/v1/airlines");

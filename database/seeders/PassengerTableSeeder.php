@@ -25,7 +25,6 @@ class PassengerTableSeeder extends Seeder
      */
     public function run()
     {
-        Passenger::truncate();
 
        // $data = $this->getAPIData("https://api.instantwebtools.net/v1/passenger"); // getting array with number totalPassengers
         $passengers = $this->getAPIData("https://api.instantwebtools.net/v1/passenger?page=0&size=10000");

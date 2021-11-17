@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Airline;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class AirlineController extends Controller
 {
@@ -29,7 +29,7 @@ class AirlineController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Support\MessageBag
      */
     public function store(Request $request)
     {
@@ -44,24 +44,14 @@ class AirlineController extends Controller
             'established' => 'required',
         ]);
 
-        if ($validator->fails()) {
-            $messages = $validator->errors();
-            return json_encode($messages->all());
-
-        } else {
-            $airline = new Airline();
-            $airline->name = $request->input('name');
-            $airline->country = $request->input('country');
-            $airline->logo = $request->input('logo');
-            $airline->slogan = $request->input('slogan');
-            $airline->headquarters = $request->input('headquarters');
-            $airline->website = $request->input('website');
-            $airline->established = $request->input('established');
-
-            $airline->save();
-
-            return $airline;
+        if($validator->fails()){
+            return $validator->errors();
         }
+
+        $validated = $validator->validated();
+        return Airline::create($validated);
+
+
     }
 
     /**

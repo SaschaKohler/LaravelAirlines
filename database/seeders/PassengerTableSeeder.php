@@ -4,12 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Passenger;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class PassengerTableSeeder extends Seeder
 {
-
-
     protected function getAPIData($url)
     {
         $httpClient = new \GuzzleHttp\Client();

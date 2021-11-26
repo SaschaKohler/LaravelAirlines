@@ -21,7 +21,7 @@ class Passenger extends Model
         $query->when($filters['search'] ?? false, fn($query,$search) =>
         $query
             ->where('name','like', '%' . $search . '%')
-            ->orWhere()
+            
         );
     }
 

@@ -29,27 +29,27 @@ class AirlineController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Support\MessageBag
+     * @return false|\Illuminate\Support\MessageBag|string
      */
     public function store(Request $request)
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'country' => 'required',
-            'logo' => 'required|url',
-            'slogan' => 'required',
-            'headquarters' => 'required',
-            'website' => 'required',
-            'established' => 'required',
+            'name' => ['required','string'],
+            'country' => ['required','string'],
+            'logo' => ['required','url'],
+            'slogan' => ['required','string'],
+            'headquarters' => ['required','string'],
+            'website' => ['required','url'],
+            'established' => ['required','integer'],
         ]);
 
         if($validator->fails()){
-            return $validator->errors();
+            return response($validator->errors()->all(),'406'); // Not Acceptable
         }
 
         $validated = $validator->validated();
-        return Airline::create($validated);
+        return response(Airline::create($validated),'201');  // Created
 
 
     }

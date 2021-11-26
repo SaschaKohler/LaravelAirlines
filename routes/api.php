@@ -20,15 +20,23 @@ use App\Http\Controllers\AirlineController;
 
 // please -> php artisan route:list
 
-Route::resource('airlines',AirlineController::class);
+Route::resource('airlines', AirlineController::class);
 
 
 //  passengers/{airline_id}?page=:page_number  returns 50 passengers per page
 
 //Route::get('passengers/{airline_id}' , [PassengerController::class, 'getPassengersPerAirlinePaginated']);
-Route::get('passengers' , [PassengerController::class, 'index']);
+Route::get('passengers', [PassengerController::class, 'index']);
 
-Route::get('register',[RegisterController::class,'create']);
-Route::post('register',[RegisterController::class,'store']);
+Route::get('register', [RegisterController::class, 'create']);
+Route::post('register', [RegisterController::class, 'store']);
+Route::post('login', [UserController::class, 'store']);
 
-Route::post('login' , [UserController::class,'store']);
+Route::middleware('auth:sanctum')->group( function () {
+    Route::get('user/{username}',[UserController::class,'show']);
+    Route::put('user/{id}', [UserController::class,'update']);
+    Route::post('user/logout', [UserController::class, 'logout']);
+
+});
+
+
